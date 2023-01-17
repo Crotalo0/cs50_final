@@ -1,0 +1,43 @@
+- Passing variables to layout.html, using @app.context_processor
+
+- Implemented cs50 sqlite3 for now, might change later with a normal sqlite3 implementation
+
+- Redirect different URL with button using onclick syntax:
+    <button class='' type='button' onclick="window.location.href='/destination-url';">Button</button>
+
+
+# CAPTCHA
+I started following this tutorial:
+https://www.youtube.com/watch?v=2tDHQIU2HB0
+
+Then i got an error saying: Markup is not defined.
+To fix that i had to find flask_recaptcha.py in python folder
+then change the line "from jinja2 import Markup" 
+to "from markupsafe import Markup" and seems to have fixed everything. 
+-Added mail pwd to env-var (FLASK-EMAIL-PWD)
+-Added otp section to DB, with otp_tries etc...
+-Added confirmed entry on users DB
+-Added email confirmation!
+-Added change mail and resend verify email in user_settings
+
+- Added profile section in user_settings
+- Added default profile pic
+- Added change profile pic logic, with uniques UUID for every load
+- Added possibility to save locally profile pics
+
+TODO:
+- Admin page
+- Extend user_settings with profile info (future)
+- Add DELETE ACCOUNT button in user_settings
+- BEFORE ADDING SITE CONTENT SAVE EVERYTHING IN GITHUB
+
+--- MAIN SITE CONTENT
+- Add water reminder
+    Saving for every user stats
+    Showing some graphs
+
+- Add todo
+- Add pomodoro
+    Saving for every user stats
+- Add music playlist (?)
+    Maybe a music reproductor from spotify or yt?

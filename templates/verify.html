@@ -1,0 +1,28 @@
+{% extends "layout.html"%}
+
+{% block title %}
+Password reset
+{% endblock %}
+
+{% block body %}
+<h1>Enter recovery code</h1>
+<div class="main-container-forms">
+    <form name=recoveryCode action="/verify" method="post" required>
+        <div class="mt-3 mb-3">
+            <div class="input-group mb-3">
+                <span class="input-group-text">
+                    <i class="bi bi-key-fill"></i>
+                </span>
+                <input id="recovery" name='recovery' placeholder='recovery-code' type="text" class="form-control"
+                    id="InputRecoveryCode">
+            </div>
+        </div>
+        <div class="mb-3">
+            <button type="submit" class="btn btn-primary">Check</button>
+        </div>
+        <h3>Remaining tries: {{ otp_tries }} </h3>
+    </form>
+</div>
+
+
+{% endblock %}

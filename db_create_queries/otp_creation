@@ -1,0 +1,10 @@
+CREATE TABLE otp(
+   user_id INTEGER,
+   send_time DATETIME DEFAULT CURRENT_TIMESTAMP,
+   tries INTEGER DEFAULT 3,
+   PRIMARY KEY (user_id),
+   FOREIGN KEY (user_id) 
+      REFERENCES users (id) 
+         ON DELETE CASCADE 
+         ON UPDATE NO ACTION
+);

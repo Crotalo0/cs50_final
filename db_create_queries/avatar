@@ -1,0 +1,9 @@
+CREATE TABLE profile_avatars(
+   user_id INTEGER,
+   pic_name TEXT DEFAULT NULL,
+   PRIMARY KEY (user_id),
+   FOREIGN KEY (user_id) 
+      REFERENCES users (id) 
+         ON DELETE CASCADE 
+         ON UPDATE NO ACTION
+);

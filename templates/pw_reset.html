@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Password reset
+{% endblock %}
+
+{% block script %}
+<script>
+    function validateForm() {
+        var x = document.forms['resetForm']['email'].value;
+        var y = document.forms['resetForm']['emailCheck'].value;
+        if (x == "" || x == null) {
+            alert("email must be filled out");
+            return false;
+        } else if (y == "" || y == null) {
+            alert("email confirm must be filled out");
+            return false;
+        }
+    }
+</script>
+{% endblock %}
+
+{% block body %}
+<h1 class="mt-5 mb-5">Reset password with email</h1>
+
+<form name=resetForm onsubmit="return validateForm()" method="post" action='/pw_reset' required>
+    <div class="main-container-forms">
+        <div class="input-group mb-3">
+            <span class="input-group-text">
+                <i class="bi bi-envelope-at-fill"></i>
+            </span>
+            <input name='email' placeholder='email' type="email" class="form-control" id="InputEmail">
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">
+                <i class="bi bi-envelope-at-fill"></i>
+            </span>
+            <input name='emailCheck' placeholder='check email' type="email" class="form-control" id="InputCheckEmail">
+        </div>
+        {{ recaptcha }} <br>
+    </div>
+    <div class="mb-3">
+        <button type="submit" class="btn btn-primary">Send recovery code</button>
+    </div>
+</form>
+{% endblock %}

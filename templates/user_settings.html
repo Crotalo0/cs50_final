@@ -1,0 +1,173 @@
+{% extends "layout.html" %}
+
+{% block title %}
+User Settings
+{% endblock %}
+
+{% block script %}
+<script>
+    function validateForm() {
+        var x = document.forms['user_settings_password_reset_form']['old-password'].value;
+        var y = document.forms['user_settings_password_reset_form']['password'].value;
+        if (x == "" || x == null) {
+            alert("old password must be filled out");
+            return false;
+        } else if (y == "" || y == null) {
+            alert("new password must be filled out");
+            return false;
+        }
+    }
+
+    function validateFormEmail() {
+        var x = document.forms['user_settings_email_reset_form']['email'].value;
+        if (x == "" || x == null) {
+            alert("email must be filled out");
+            return false;
+        }
+    }
+
+    function validateFormPic() {
+        var x = document.forms['profile_pic_change']['profile_pic_form'].value;
+        if (x == "" || x == null) {
+            alert("please select an avatar first");
+            return false;
+        }
+    }
+</script>
+{% endblock %}
+
+{% block body %}
+<h1>User settings</h1><br>
+
+{% if not account_is_verified %}
+<p><em>Your account is not verified.</em></p>
+<div class="mb-3">
+    <a type="button" class="btn btn-primary" href={{ url_for('verification_email_sender') }}>Send new
+        verification email</a>
+</div>
+<br>
+<hr class="divider">
+{% endif %}
+
+<h2>Profile info</h2>
+<strong>Username:</strong>
+{{ session["user"] }} <br>
+<strong>Email:</strong>
+{{ session["email"] }} <br>
+<strong>Profile pic:</strong>
+{{ session["profile_pic"] }}
+<br><br>
+
+{% if not profile_pic %}
+<img src="{{ url_for('static',filename='default_profile_pic.png')}}" width="300" height="300">
+{% else %}
+<img src="{{ url_for('static', filename='images/'+profile_pic)}}" width="300" height="300">
+{% endif %}
+<br><br>
+<hr class="divider">
+<h2>Password reset</h2>
+<div class="main-container-forms">
+    <form name=user_settings_password_reset_form onsubmit="return validateForm()" action="/user_settings" method="post"
+        required>
+        <div class="mb-3">
+            <div class="mt-3 mb-3">
+                <div class="input-group mb-3">
+                    <span class="input-group-text">
+                        <i class="bi bi-lock-fill"></i>
+                    </span>
+                    <input id="old-password" name='old-password' placeholder='old password' type="password"
+                        class="form-control" id="InputPassword">
+                    <span class="input-group-text"
+                        onclick="password_show_hide('old-password', 'hide_eye_main_old', 'show_eye_main_old');">
+                        <i class="bi bi-eye-fill" id="show_eye_main_old"></i>
+                        <i class="bi bi-eye-slash-fill d-none" id="hide_eye_main_old"></i>
+                    </span>
+                </div>
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text">
+                        <i class="bi bi-lock-fill"></i>
+                    </span>
+                    <input id="password" name='password' placeholder='new password' type="password" class="form-control"
+                        id="InputPassword">
+                    <span class="input-group-text"
+                        onclick="password_show_hide('password', 'hide_eye_main', 'show_eye_main');">
+                        <i class="bi bi-eye-fill" id="show_eye_main"></i>
+                        <i class="bi bi-eye-slash-fill d-none" id="hide_eye_main"></i>
+                    </span>
+                </div>
+
+                <div class="input-group mt-3 mb-3">
+                    <span class="input-group-text">
+                        <i class="bi bi-lock-fill"></i>
+                    </span>
+                    <input id="check-password" name='pwdCheck' placeholder='check password' type="password"
+                        class="form-control" id="InputCheckPwd">
+                    <span class="input-group-text"
+                        onclick="password_show_hide('check-password', 'check-hide_eye', 'check-show_eye');">
+                        <i class="bi bi-eye-fill" id="check-show_eye"></i>
+                        <i class="bi bi-eye-slash-fill d-none" id="check-hide_eye"></i>
+                    </span>
+                </div>
+                <small id="passwordHelpBlock" class="form-text text-muted">
+                    Your password must be at least 8 characters long, contain at least one letter, one number and one
+                    symbol.
+                </small><br>
+            </div>
+        </div>
+        <div class="mb-3">
+            <button type="submit" class="btn btn-primary">Change password</button>
+        </div>
+    </form>
+</div>
+
+<br>
+<hr class="divider">
+
+<h2>Email change</h2>
+<div class="main-container-forms">
+    <form name=user_settings_email_reset_form onsubmit="return validateFormEmail()" action="/user_settings"
+        method="post" required>
+        <div class="mb-3">
+            <div class="mt-3 mb-3">
+                <div class="input-group mb-3">
+                    <span class="input-group-text">
+                        <i class="bi bi-envelope-at-fill"></i>
+                    </span>
+                    <input name='email' placeholder='email' type="email" class="form-control" id="InputEmail">
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">
+                        <i class="bi bi-envelope-at-fill"></i>
+                    </span>
+                    <input name='emailCheck' placeholder='check email' type="email" class="form-control"
+                        id="InputCheckEmail">
+                </div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <button type="submit" class="btn btn-primary">Change email</button>
+        </div>
+    </form>
+</div>
+
+<br>
+<hr class="divider">
+
+<h2>Change avatar</h2>
+
+<div class="main-container-forms">
+    <form name=profile_pic_change onsubmit="return validateFormPic()" action="/user_settings" method="post"
+        enctype="multipart/form-data" required>
+        <div class="mb-3">
+            <label for="formFile" class="form-label">Select your profile pic locally</label>
+            <input name="profile_pic_form" class="form-control" type="file" id="formFile">
+        </div>
+        <div class="mb-3">
+            <button type="submit" class="btn btn-primary">Change profile pic</button>
+        </div>
+    </form>
+</div>
+
+
+{% endblock %}

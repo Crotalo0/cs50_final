@@ -1,0 +1,16 @@
+.main-container-forms {
+    width: 300px;
+    max-width: 100%;
+    margin: auto;
+}
+
+.divider {
+    width: 20%;
+    margin: 10px auto 36px auto;
+}
+
+hr {
+    border: none;
+    height: 1px;
+    color: rgb(120, 126, 122);
+}

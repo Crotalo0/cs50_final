@@ -1,0 +1,10 @@
+CREATE TABLE otp_timeout(
+   user_id INTEGER,
+   is_timeoutted BOOLEAN DEFAULT TRUE,
+   timeout_time DATETIME DEFAULT CURRENT_TIMESTAMP,
+   PRIMARY KEY (user_id),
+   FOREIGN KEY (user_id) 
+      REFERENCES users (id) 
+         ON DELETE CASCADE 
+         ON UPDATE NO ACTION
+);

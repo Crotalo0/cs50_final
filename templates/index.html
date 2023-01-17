@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Homepage
+{% endblock %}
+
+{% block body %}
+<h1>Hello New Visitor!</h1>
+<p>Login or Sign up</p>
+
+<!-- Buttons  -->
+<div class="d-grid gap-3 col-6 mx-auto">
+    <button class="btn btn-primary" type="button" onclick="window.location.href='/login';">Log In</button>
+    <button class="btn btn-primary" type="button" onclick="window.location.href='/register';">Sign Up</button>
+</div>
+{% endblock %}

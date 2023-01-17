@@ -1,0 +1,5 @@
+flask
+requests
+cs50
+werkzeug
+smtplib
