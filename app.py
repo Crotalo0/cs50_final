@@ -31,7 +31,7 @@ from helpers import random_url_gen
 
 app = Flask(__name__)
 app.config["TEMPLATES_AUTO_RELOAD"] = True
-app.secret_key = "aklsjghoi23u5tyo879gf*(^*&^$@!i8o7TVC9SE876GVT"
+app.secret_key = os.environ["FLASK_SECRET_KEY"]
 
 UPLOAD_FOLDER = "static/images/"
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
@@ -44,7 +44,7 @@ db = SQL("sqlite:///users.sqlite3")
 
 mail = Mail(
     "smtp.gmail.com",
-    "piedeciabatta@gmail.com",
+    os.environ["FLASK_EMAIL"],
     os.environ["FLASK_EMAIL_PWD"],
 )
 
@@ -56,8 +56,8 @@ recaptcha = ReCaptcha(app=app)
 app.config.update(
     dict(
         RECAPTCHA_ENABLED=True,
-        RECAPTCHA_SITE_KEY="6Le-gpMjAAAAAGMwn62_y756KD0aA9n5s-fgR0NI",
-        RECAPTCHA_SECRET_KEY="6Le-gpMjAAAAALqF6MQSpMXK3dN4qRgfMzYd2Dfp",
+        RECAPTCHA_SITE_KEY=os.environ["RECAPTCHA_SITE_KEY"],
+        RECAPTCHA_SECRET_KEY=os.environ["RECAPTCHA_SECRET_KEY"],
     )
 )
 recaptcha.init_app(app)
