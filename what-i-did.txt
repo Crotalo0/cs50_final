@@ -30,6 +30,7 @@ TODO:
 - Extend user_settings with profile info (future)
 - Add DELETE ACCOUNT button in user_settings
 - BEFORE ADDING SITE CONTENT SAVE EVERYTHING IN GITHUB
+    ADD PROPER README ON GITHUB
 
 --- MAIN SITE CONTENT
 - Add water reminder
